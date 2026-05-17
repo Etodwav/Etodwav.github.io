@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Черемша</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: black;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-family: Arial, sans-serif;
+    }
+
+    /* Картинка */
+    img {
+      width: 400px;
+      max-width: 80vw;
+
+      border-radius: 20px;
+
+      filter: blur(40px);
+      opacity: 0;
+
+      transition:
+        filter 8s ease,
+        opacity 8s ease,
+        transform 8s ease;
+
+      transform: scale(1.08);
+    }
+
+    img.show {
+      filter: blur(0px);
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Экран приветствия */
+    .overlay {
+      position: fixed;
+      inset: 0;
+
+      background: rgba(0,0,0,0.96);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      z-index: 10;
+
+      transition: opacity 1s ease;
+    }
+
+    .overlay.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .box {
+      width: 420px;
+      max-width: 90vw;
+
+      background: #111;
+      border: 1px solid #333;
+
+      border-radius: 20px;
+
+      padding: 30px;
+
+      text-align: center;
+
+      color: white;
+
+      box-shadow: 0 0 40px rgba(255,255,255,0.08);
+    }
+
+    .box h1 {
+      margin-bottom: 15px;
+      font-size: 28px;
+    }
+
+    .box p {
+      opacity: 0.7;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      border: none;
+      outline: none;
+
+      background: white;
+      color: black;
+
+      padding: 14px 28px;
+
+      border-radius: 12px;
+
+      font-size: 16px;
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: 0.25s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Музыка -->
+  <audio id="music" loop>
+    <source src="Cheremsha.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Картинка -->
+  <img id="photo" src="Черемша.png" alt="Черемша">
+
+  <!-- Экран -->
+  <div class="overlay" id="overlay">
+    <div class="box">
+      <h1>Файлы cookie</h1>
+
+      <p>
+        Этот сайт использует cookie-файлы для улучшения пользовательского опыта.
+      </p>
+
+      <button class="btn" id="acceptBtn">
+        Принять
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById("acceptBtn");
+    const overlay = document.getElementById("overlay");
+    const photo = document.getElementById("photo");
+    const audio = document.getElementById("music");
+
+    // громкость 30%
+    audio.volume = 0.3;
+
+    btn.addEventListener("click", () => {
+
+      // скрыть окно
+      overlay.classList.add("hide");
+
+      // включить музыку
+      audio.play();
+
+      // показать картинку
+      setTimeout(() => {
+        photo.classList.add("show");
+      }, 300);
+
+    });
+  </script>
+
+</body>
+</html>
